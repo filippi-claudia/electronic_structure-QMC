@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-05-31 Wed 15:42 -->
+<!-- 2024-06-02 Sun 13:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Quantum Monte Carlo</title>
-<meta name="author" content="Anthony Scemama, Claudia Filippi" />
+<meta name="author" content="Anthony Scemama, Vijay Gopal Chilkuri, Claudia Filippi" />
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -214,27 +214,38 @@ org_html_manager.set("VIEW", "info");
 org_html_manager.setup();  // activate after the parameters are set
 // @license-end
 </script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -243,98 +254,98 @@ org_html_manager.setup();  // activate after the parameters are set
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdba6aa3">1. Introduction</a>
+<li><a href="#orge32938a">1. Introduction</a>
 <ul>
-<li><a href="#orgcbd5916">1.1. Energy and local energy</a></li>
+<li><a href="#org5fcd124">1.1. Energy and local energy</a></li>
 </ul>
 </li>
-<li><a href="#org7fc0908">2. Numerical evaluation of the energy of the hydrogen atom</a>
+<li><a href="#org2eb44d2">2. Numerical evaluation of the energy of the hydrogen atom</a>
 <ul>
-<li><a href="#org98bb992">2.1. Local energy</a>
+<li><a href="#orgfcee7e1">2.1. Local energy</a>
 <ul>
-<li><a href="#org9b16cd9">2.1.1. Exercise 1</a></li>
-<li><a href="#orgfe820d7">2.1.2. Exercise 2</a></li>
-<li><a href="#org951900b">2.1.3. Exercise 3</a></li>
-<li><a href="#orgdae23c0">2.1.4. Exercise 4</a></li>
-<li><a href="#orge40d205">2.1.5. Exercise 5</a></li>
+<li><a href="#org78bd2cb">2.1.1. Exercise 1</a></li>
+<li><a href="#orgba09fa9">2.1.2. Exercise 2</a></li>
+<li><a href="#orgcc3bf3b">2.1.3. Exercise 3</a></li>
+<li><a href="#org4be6bff">2.1.4. Exercise 4</a></li>
+<li><a href="#orgfdaacfc">2.1.5. Exercise 5</a></li>
 </ul>
 </li>
-<li><a href="#org5fdd095">2.2. Plot of the local energy along the \(x\) axis</a>
+<li><a href="#org14a28e2">2.2. Plot of the local energy along the \(x\) axis</a>
 <ul>
-<li><a href="#org439858c">2.2.1. Exercise</a></li>
+<li><a href="#orgbdb4a6e">2.2.1. Exercise</a></li>
 </ul>
 </li>
-<li><a href="#orgdb1ddbb">2.3. Numerical estimation of the energy</a>
+<li><a href="#orgd8fa646">2.3. Numerical estimation of the energy</a>
 <ul>
-<li><a href="#orga2ccb99">2.3.1. Exercise</a></li>
+<li><a href="#org75c595e">2.3.1. Exercise</a></li>
 </ul>
 </li>
-<li><a href="#orgcf23e5e">2.4. Variance of the local energy</a>
+<li><a href="#org081e40d">2.4. Variance of the local energy</a>
 <ul>
-<li><a href="#orgf0cf099">2.4.1. Exercise</a></li>
-<li><a href="#org5b5b573">2.4.2. Exercise</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgb4a705d">3. Variational Monte Carlo</a>
-<ul>
-<li><a href="#orgbb4a81e">3.1. Computation of the statistical error</a>
-<ul>
-<li><a href="#orgddf8e24">3.1.1. Exercise</a></li>
-</ul>
-</li>
-<li><a href="#org4362875">3.2. Uniform sampling in the box</a>
-<ul>
-<li><a href="#orgb929c7b">3.2.1. Exercise</a></li>
-</ul>
-</li>
-<li><a href="#org65f66f2">3.3. Metropolis sampling with \(\Psi^2\)</a>
-<ul>
-<li><a href="#org230248c">3.3.1. Optimal step size</a></li>
-<li><a href="#org2184f59">3.3.2. Exercise</a></li>
-</ul>
-</li>
-<li><a href="#orged0a3ea">3.4. Generalized Metropolis algorithm</a>
-<ul>
-<li><a href="#orgb9879b0">3.4.1. Gaussian random number generator</a></li>
-<li><a href="#org1bdda4f">3.4.2. Exercise 1</a></li>
-<li><a href="#org589f2e1">3.4.3. Exercise 2</a></li>
+<li><a href="#org6c3b64b">2.4.1. Exercise</a></li>
+<li><a href="#org7f86474">2.4.2. Exercise</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org0597139">4. Diffusion Monte Carlo</a>
+<li><a href="#org5d14309">3. Variational Monte Carlo</a>
 <ul>
-<li><a href="#org767bc18">4.1. Schrödinger equation in imaginary time</a></li>
-<li><a href="#org6a3dd09">4.2. Relation to diffusion</a></li>
-<li><a href="#orge652bd9">4.3. Importance sampling</a>
+<li><a href="#orgb080a8c">3.1. Computation of the statistical error</a>
 <ul>
-<li><a href="#org2d64d3c">4.3.1. Appendix : Details of the Derivation</a></li>
+<li><a href="#orgbad684f">3.1.1. Exercise</a></li>
 </ul>
 </li>
-<li><a href="#orgb106070">4.4. Pure Diffusion Monte Carlo</a></li>
-<li><a href="#orga20717a">4.5. Hydrogen atom</a>
+<li><a href="#org0cd97eb">3.2. Uniform sampling in the box</a>
 <ul>
-<li><a href="#org778faf1">4.5.1. Exercise</a></li>
+<li><a href="#orgacddb5d">3.2.1. Exercise</a></li>
+</ul>
+</li>
+<li><a href="#org44565c6">3.3. Metropolis sampling with \(\Psi^2\)</a>
+<ul>
+<li><a href="#orga15b7ba">3.3.1. Optimal step size</a></li>
+<li><a href="#orga8338d7">3.3.2. Exercise</a></li>
+</ul>
+</li>
+<li><a href="#orgd46c0ba">3.4. Generalized Metropolis algorithm</a>
+<ul>
+<li><a href="#org9c27380">3.4.1. Gaussian random number generator</a></li>
+<li><a href="#org2615491">3.4.2. Exercise 1</a></li>
+<li><a href="#org40fd304">3.4.3. Exercise 2</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org47d83c1">5. Going beyond one electron</a></li>
-<li><a href="#org919eeb7">6. Acknowledgments</a></li>
+<li><a href="#org552c5fc">4. Diffusion Monte Carlo</a>
+<ul>
+<li><a href="#orgb776ef0">4.1. Schrödinger equation in imaginary time</a></li>
+<li><a href="#org61fc070">4.2. Relation to diffusion</a></li>
+<li><a href="#orgc5e1b8b">4.3. Importance sampling</a>
+<ul>
+<li><a href="#orgbf2939f">4.3.1. Appendix : Details of the Derivation</a></li>
+</ul>
+</li>
+<li><a href="#org8187630">4.4. Pure Diffusion Monte Carlo</a></li>
+<li><a href="#orga45bd0c">4.5. Hydrogen atom</a>
+<ul>
+<li><a href="#orgd4e0228">4.5.1. Exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org76c1e44">5. Going beyond one electron</a></li>
+<li><a href="#org4fb2d79">6. Acknowledgments</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgdba6aa3" class="outline-2">
-<h2 id="orgdba6aa3"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-orge32938a" class="outline-2">
+<h2 id="orge32938a"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 We propose different exercises to understand quantum Monte Carlo (QMC)
 methods. In the first section, we start with the computation of the energy of a
 hydrogen atom using numerical integration. The goal of this section is
-to familarize yourself with the concept of <i>local energy</i>.
+to familiarize yourself with the concept of <i>local energy</i>.
 Then, we introduce the variational Monte Carlo (VMC) method which
 computes a statistical estimate of the expectation value of the energy
 associated with a given wave function, and apply this approach to the
@@ -363,8 +374,8 @@ coordinates, etc).
 </p>
 </div>
 
-<div id="outline-container-orgcbd5916" class="outline-3">
-<h3 id="orgcbd5916"><span class="section-number-3">1.1.</span> Energy and local energy</h3>
+<div id="outline-container-org5fcd124" class="outline-3">
+<h3 id="org5fcd124"><span class="section-number-3">1.1.</span> Energy and local energy</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 For a given system with Hamiltonian \(\hat{H}\) and wave function \(\Psi\), we define the local energy as
@@ -405,11 +416,11 @@ function \(P(x)\) is given by
 </p>
 
 <p>
-\[ \langle f \rangle_P = \int_{-\infty}^\infty P(x)\, f(x)\,dx, \]
+\[ \langle f \rangle_P = \int_{-\infty}^\infty f(x)\, P(x)\, dx, \]
 </p>
 
 <p>
-where a probability density function \(P(x)\) is non-negative
+where the probability density function \(P(x)\) is non-negative
 and integrates to one:
 </p>
 
@@ -418,7 +429,7 @@ and integrates to one:
 </p>
 
 <p>
-Similarly, we can view the the energy of a system, \(E\), as the expected value of the local energy with respect to 
+Similarly, we can view the energy of a system, \(E\), as the expected value of the local energy with respect to 
 a probability density \(P(\mathbf{R})\) defined in 3\(N\) dimensions:
 </p>
 
@@ -450,7 +461,7 @@ a QMC trajectory:
 </p>
 
 
-<div id="org24a88ca" class="figure">
+<div id="orge192445" class="figure">
 <p><img src="./n2.gif" alt="n2.gif" />
 </p>
 </div>
@@ -458,8 +469,8 @@ a QMC trajectory:
 </div>
 </div>
 
-<div id="outline-container-org7fc0908" class="outline-2">
-<h2 id="org7fc0908"><span class="section-number-2">2.</span> Numerical evaluation of the energy of the hydrogen atom</h2>
+<div id="outline-container-org2eb44d2" class="outline-2">
+<h2 id="org2eb44d2"><span class="section-number-2">2.</span> Numerical evaluation of the energy of the hydrogen atom</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 In this section, we consider the hydrogen atom (3 dimensions, \(\mathbf{R} \rightarrow \mathbf{r}\)) with the following wave function:
@@ -487,8 +498,8 @@ To do that, we will compute the local energy and check whether it is constant.
 </p>
 </div>
 
-<div id="outline-container-org98bb992" class="outline-3">
-<h3 id="org98bb992"><span class="section-number-3">2.1.</span> Local energy</h3>
+<div id="outline-container-orgfcee7e1" class="outline-3">
+<h3 id="orgfcee7e1"><span class="section-number-3">2.1.</span> Local energy</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 You will now program all quantities needed to compute the local energy of the H atom for the given wave function.
@@ -500,7 +511,7 @@ Write all the functions of this section in a single file :
 Fortran.
 </p>
 
-<div class="note" id="orgd46e671">
+<div class="note" id="orgb2bfa22">
 <ul class="org-ul">
 <li>When computing a square root in \(\mathbb{R}\), <b>always</b> make sure
 that the argument of the square root is non-negative.</li>
@@ -515,23 +526,24 @@ to catch the error.
 </div>
 </div>
 
-<div id="outline-container-org9b16cd9" class="outline-4">
-<h4 id="org9b16cd9"><span class="section-number-4">2.1.1.</span> Exercise 1</h4>
+<div id="outline-container-org78bd2cb" class="outline-4">
+<h4 id="org78bd2cb"><span class="section-number-4">2.1.1.</span> Exercise 1</h4>
 <div class="outline-text-4" id="text-2-1-1">
-<div class="exercise" id="orge3f157c">
+<div class="exercise" id="org3612391">
 <p>
 Write a function which computes the potential at \(\mathbf{r}\).
-The function accepts a 3-dimensional vector <code>r</code> as input argument
-and returns the potential.
+The function is called <code>potential</code>  and accepts a 3-dimensional 
+vector <code>r</code> as input argument and returns the potential.
 </p>
 
 </div>
 
 <p>
-\(\mathbf{r}=\left( \begin{array}{c} x \\ y\\ z\end{array} \right)\), so
 \[
-    V(\mathbf{r}) = -\frac{1}{\sqrt{x^2 + y^2 + z^2}}
+    V(\mathbf{r}) = -\frac{1}{\sqrt{x^2 + y^2 + z^2}}, \text{ with }
+    \mathbf{r}=\left( \begin{array}{c} x \\ y\\ z\end{array} \right),
     \]
+#+end<sub>exercise</sub>
 </p>
 
 <p>
@@ -562,12 +574,12 @@ and returns the potential.
 </div>
 </div>
 
-<div id="outline-container-orgfe820d7" class="outline-4">
-<h4 id="orgfe820d7"><span class="section-number-4">2.1.2.</span> Exercise 2</h4>
+<div id="outline-container-orgba09fa9" class="outline-4">
+<h4 id="orgba09fa9"><span class="section-number-4">2.1.2.</span> Exercise 2</h4>
 <div class="outline-text-4" id="text-2-1-2">
-<div class="exercise" id="orgc7370da">
+<div class="exercise" id="org9e8af4c">
 <p>
-Write a function which computes the wave function at \(\mathbf{r}\).
+Write a function called <code>psi</code> which computes the wave function at \(\mathbf{r}\).
 The function accepts a scalar <code>a</code> and a 3-dimensional vector \(\mathbf{r}\) as
 input arguments, and returns a scalar.
 </p>
@@ -599,10 +611,10 @@ input arguments, and returns a scalar.
 </div>
 </div>
 
-<div id="outline-container-org951900b" class="outline-4">
-<h4 id="org951900b"><span class="section-number-4">2.1.3.</span> Exercise 3</h4>
+<div id="outline-container-orgcc3bf3b" class="outline-4">
+<h4 id="orgcc3bf3b"><span class="section-number-4">2.1.3.</span> Exercise 3</h4>
 <div class="outline-text-4" id="text-2-1-3">
-<div class="exercise" id="org83ee528">
+<div class="exercise" id="org14197f2">
 <p>
 Show that the local kinetic energy at \(\mathbf{r}\) has the following form:
 </p>
@@ -620,9 +632,9 @@ and, for the wave function \(\Psi=\exp(-a\,|\mathbf{r}|)\), has the following fo
     \]
 </p>
 
-<div class="exercise" id="orge085df6">
+<div class="exercise" id="org3571855">
 <p>
-Write a function which computes the local kinetic energy at \(\mathbf{r}\).
+Write a function called <code>kinetic</code> that computes the local kinetic energy at \(\mathbf{r}\).
 The function accepts <code>a</code> and <code>r</code> as input arguments and returns the
 local kinetic energy.
 </p>
@@ -655,12 +667,12 @@ local kinetic energy.
 </div>
 </div>
 
-<div id="outline-container-orgdae23c0" class="outline-4">
-<h4 id="orgdae23c0"><span class="section-number-4">2.1.4.</span> Exercise 4</h4>
+<div id="outline-container-org4be6bff" class="outline-4">
+<h4 id="org4be6bff"><span class="section-number-4">2.1.4.</span> Exercise 4</h4>
 <div class="outline-text-4" id="text-2-1-4">
-<div class="exercise" id="orgc9c379f">
+<div class="exercise" id="org2374c54">
 <p>
-Write a function which computes the local energy at \(\mathbf{r}\),
+Write a function called <code>e_loc</code> which computes the local energy at \(\mathbf{r}\),
 using the previously defined functions.
 The function accepts <code>a</code> and <code>r</code> as input arguments and returns the
 local kinetic energy.
@@ -688,7 +700,7 @@ local kinetic energy.
 <b>Fortran</b>
 </p>
 
-<div class="note" id="org3f1de32">
+<div class="note" id="org8582019">
 <p>
 When you call a function in Fortran, you need to declare its
 return type.
@@ -716,10 +728,10 @@ are calling is yours.
 </div>
 </div>
 
-<div id="outline-container-orge40d205" class="outline-4">
-<h4 id="orge40d205"><span class="section-number-4">2.1.5.</span> Exercise 5</h4>
+<div id="outline-container-orgfdaacfc" class="outline-4">
+<h4 id="orgfdaacfc"><span class="section-number-4">2.1.5.</span> Exercise 5</h4>
 <div class="outline-text-4" id="text-2-1-5">
-<div class="exercise" id="org427fc21">
+<div class="exercise" id="org8486b39">
 <p>
 Starting from the expression of the local energy for the hydrogen atom and the given wave function, find the theoretical value of \(a\) for which \(\Psi\) is an eigenfunction of \(\hat{H}\).
 </p>
@@ -729,8 +741,8 @@ Starting from the expression of the local energy for the hydrogen atom and the g
 </div>
 </div>
 
-<div id="outline-container-org5fdd095" class="outline-3">
-<h3 id="org5fdd095"><span class="section-number-3">2.2.</span> Plot of the local energy along the \(x\) axis</h3>
+<div id="outline-container-org14a28e2" class="outline-3">
+<h3 id="org14a28e2"><span class="section-number-3">2.2.</span> Plot of the local energy along the \(x\) axis</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 The program you will write in this section will be written in
@@ -761,18 +773,21 @@ In Fortran, you will need to compile all the source files together:
 </div>
 </div>
 
-<div id="outline-container-org439858c" class="outline-4">
-<h4 id="org439858c"><span class="section-number-4">2.2.1.</span> Exercise</h4>
+<div id="outline-container-orgbdb4a6e" class="outline-4">
+<h4 id="orgbdb4a6e"><span class="section-number-4">2.2.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-2-2-1">
-<div class="exercise" id="org7189cff">
+<div class="exercise" id="org01e19bf">
 <p>
 For multiple values of \(a\) (0.1, 0.2, 0.5, 1., 1.5, 2.), plot the
 local energy along the \(x\) axis. Explain your findings.
 </p>
 
 <p>
-In Python, you can use matplotlib
-for example. In Fortran, it is convenient to write in a text file
+In Python, you can use matplotlib for example. 
+</p>
+
+<p>
+In Fortran, it is convenient to write in a text file
 the values of \(x\) and \(E_L(\mathbf{r})\) for each point, and use
 Gnuplot to plot the files. With Gnuplot, you will need 2 blank
 lines to separate the data corresponding to different values of \(a\).
@@ -780,7 +795,7 @@ lines to separate the data corresponding to different values of \(a\).
 
 </div>
 
-<div class="note" id="org77b5b61">
+<div class="note" id="org7066ea3">
 <p>
 The potential and the kinetic energy both diverge at \(r=0\), so we
 choose a grid which does not contain the origin to avoid numerical issues.
@@ -862,8 +877,8 @@ plot './data' index 0 using 1:2 with lines title 'a=0.1', \
 </div>
 </div>
 
-<div id="outline-container-orgdb1ddbb" class="outline-3">
-<h3 id="orgdb1ddbb"><span class="section-number-3">2.3.</span> Numerical estimation of the energy</h3>
+<div id="outline-container-orgd8fa646" class="outline-3">
+<h3 id="orgd8fa646"><span class="section-number-3">2.3.</span> Numerical estimation of the energy</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 If the space is discretized in small volume elements \(\mathbf{r}_i\)
@@ -880,7 +895,7 @@ multiplied by the volume element:
    \]
 </p>
 
-<div class="note" id="orgbe1ec29">
+<div class="note" id="org78c5f20">
 <p>
 The energy is biased because:
 </p>
@@ -893,10 +908,10 @@ The energy is biased because:
 </div>
 
 
-<div id="outline-container-orga2ccb99" class="outline-4">
-<h4 id="orga2ccb99"><span class="section-number-4">2.3.1.</span> Exercise</h4>
+<div id="outline-container-org75c595e" class="outline-4">
+<h4 id="org75c595e"><span class="section-number-4">2.3.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-2-3-1">
-<div class="exercise" id="org2e01317">
+<div class="exercise" id="org0e8ed1f">
 <p>
 Compute a numerical estimate of the energy using a grid of
 \(50\times50\times50\) points in the range \((-5,-5,-5) \le
@@ -915,13 +930,13 @@ Compute a numerical estimate of the energy using a grid of
 <span style="color: #a020f0;">from</span> hydrogen <span style="color: #a020f0;">import</span> e_loc, psi
 
 <span style="color: #a0522d;">interval</span> = np.linspace(-5,5,num=50)
-delta = (interval[1]-interval[0])**3
+<span style="color: #a0522d;">delta</span> = (interval[1]-interval[0])**3
 
-r = np.array([0.,0.,0.])
+<span style="color: #a0522d;">r</span> = np.array([0.,0.,0.])
 
 <span style="color: #a020f0;">for</span> a <span style="color: #a020f0;">in</span> [0.1, 0.2, 0.5, 0.9, 1., 1.5, 2.]:
     # <span style="color: #b22222;">TODO</span>
-    <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"a = </span>{a}<span style="color: #8b2252;"> \t E = </span>{E}<span style="color: #8b2252;">"</span>)                
+    <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"a = </span>{a}<span style="color: #8b2252;"> </span><span style="color: #008b8b;">\t</span><span style="color: #8b2252;"> E = </span>{E}<span style="color: #8b2252;">"</span>)                
 
 </pre>
 </div>
@@ -967,8 +982,8 @@ To compile the Fortran and run it:
 </div>
 </div>
 
-<div id="outline-container-orgcf23e5e" class="outline-3">
-<h3 id="orgcf23e5e"><span class="section-number-3">2.4.</span> Variance of the local energy</h3>
+<div id="outline-container-org081e40d" class="outline-3">
+<h3 id="org081e40d"><span class="section-number-3">2.4.</span> Variance of the local energy</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 The variance of the local energy is a functional of \(\Psi\)
@@ -995,10 +1010,10 @@ energy can be used as a measure of the quality of a wave function.
 </p>
 </div>
 
-<div id="outline-container-orgf0cf099" class="outline-4">
-<h4 id="orgf0cf099"><span class="section-number-4">2.4.1.</span> Exercise</h4>
+<div id="outline-container-org6c3b64b" class="outline-4">
+<h4 id="org6c3b64b"><span class="section-number-4">2.4.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-2-4-1">
-<div class="exercise" id="org01e2524">
+<div class="exercise" id="org1c35b42">
 <p>
 Prove that :
 \[\langle \left( E - \langle E \rangle_{\Psi^2} \right)^2\rangle_{\Psi^2}  = \langle E^2 \rangle_{\Psi^2} - \langle E \rangle_{\Psi^2}^2 \]
@@ -1007,10 +1022,11 @@ Prove that :
 </div>
 </div>
 </div>
-<div id="outline-container-org5b5b573" class="outline-4">
-<h4 id="org5b5b573"><span class="section-number-4">2.4.2.</span> Exercise</h4>
+
+<div id="outline-container-org7f86474" class="outline-4">
+<h4 id="org7f86474"><span class="section-number-4">2.4.2.</span> Exercise</h4>
 <div class="outline-text-4" id="text-2-4-2">
-<div class="exercise" id="org97dddf4">
+<div class="exercise" id="org70fd557">
 <p>
 Add the calculation of the variance to the previous code for hydrogen, and
 compute a numerical estimate of the variance of the local energy using
@@ -1030,15 +1046,15 @@ a grid of \(50\times50\times50\) points in the range \((-5,-5,-5) \le
 
 <span style="color: #a0522d;">interval</span> = np.linspace(-5,5,num=50)
 
-delta = (interval[1]-interval[0])**3
+<span style="color: #a0522d;">delta</span> = (interval[1]-interval[0])**3
 
-r = np.array([0.,0.,0.])
+<span style="color: #a0522d;">r</span> = np.array([0.,0.,0.])
 
 <span style="color: #a020f0;">for</span> a <span style="color: #a020f0;">in</span> [0.1, 0.2, 0.5, 0.9, 1., 1.5, 2.]:
 
     # <span style="color: #b22222;">TODO</span>
 
-    <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"a = </span>{a}<span style="color: #8b2252;"> \t E = </span>{E:10.8f}<span style="color: #8b2252;"> \t \sigma^2 = </span>{s2:10.8f}<span style="color: #8b2252;">"</span>)
+    <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"a = </span>{a}<span style="color: #8b2252;"> </span><span style="color: #008b8b;">\t</span><span style="color: #8b2252;"> E = </span>{E:10.8f}<span style="color: #8b2252;"> </span><span style="color: #008b8b;">\t</span><span style="color: #8b2252;"> \sigma^2 = </span>{s2:10.8f}<span style="color: #8b2252;">"</span>)
 </pre>
 </div>
 
@@ -1087,8 +1103,8 @@ To compile and run:
 </div>
 </div>
 
-<div id="outline-container-orgb4a705d" class="outline-2">
-<h2 id="orgb4a705d"><span class="section-number-2">3.</span> Variational Monte Carlo</h2>
+<div id="outline-container-org5d14309" class="outline-2">
+<h2 id="org5d14309"><span class="section-number-2">3.</span> Variational Monte Carlo</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Numerical integration with deterministic methods is very efficient
@@ -1104,8 +1120,8 @@ interval.
 </p>
 </div>
 
-<div id="outline-container-orgbb4a81e" class="outline-3">
-<h3 id="orgbb4a81e"><span class="section-number-3">3.1.</span> Computation of the statistical error</h3>
+<div id="outline-container-orgb080a8c" class="outline-3">
+<h3 id="orgb080a8c"><span class="section-number-3">3.1.</span> Computation of the statistical error</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 To compute the statistical error, you need to perform \(M\)
@@ -1145,10 +1161,10 @@ And the confidence interval is given by
 </p>
 </div>
 
-<div id="outline-container-orgddf8e24" class="outline-4">
-<h4 id="orgddf8e24"><span class="section-number-4">3.1.1.</span> Exercise</h4>
+<div id="outline-container-orgbad684f" class="outline-4">
+<h4 id="orgbad684f"><span class="section-number-4">3.1.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-3-1-1">
-<div class="exercise" id="orgc97323c">
+<div class="exercise" id="orgab04676">
 <p>
 Write a function returning the average and statistical error of an
 input array.
@@ -1188,8 +1204,8 @@ input array.
 </div>
 </div>
 
-<div id="outline-container-org4362875" class="outline-3">
-<h3 id="org4362875"><span class="section-number-3">3.2.</span> Uniform sampling in the box</h3>
+<div id="outline-container-org0cd97eb" class="outline-3">
+<h3 id="org0cd97eb"><span class="section-number-3">3.2.</span> Uniform sampling in the box</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 We will now perform our first Monte Carlo calculation to compute the
@@ -1250,15 +1266,15 @@ compute the statistical error.
 </p>
 </div>
 
-<div id="outline-container-orgb929c7b" class="outline-4">
-<h4 id="orgb929c7b"><span class="section-number-4">3.2.1.</span> Exercise</h4>
+<div id="outline-container-orgacddb5d" class="outline-4">
+<h4 id="orgacddb5d"><span class="section-number-4">3.2.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-3-2-1">
-<div class="exercise" id="orgc7a012b">
+<div class="exercise" id="orgbd03538">
 <p>
 Parameterize the wave function with \(a=1.2\).  Perform 30
 independent Monte Carlo runs, each with 100 000 Monte Carlo
-steps. Store the final energies of each run and use this array to
-compute the average energy and the associated error bar.
+steps (\(N_{MC}\)). Store the final energies of each run and use this array to
+compute the average energy and the associated error bar (\(\delta E\)).
 </p>
 
 </div>
@@ -1266,7 +1282,7 @@ compute the average energy and the associated error bar.
 <p>
 <b>Python</b>
 </p>
-<div class="note" id="orgce41d30">
+<div class="note" id="org06fa6a3">
 <p>
 To draw a uniform random number in Python, you can use
 the <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.uniform.html"><code>random.uniform</code></a> function of Numpy.
@@ -1295,7 +1311,7 @@ the <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.rando
 <p>
 <b>Fortran</b>
 </p>
-<div class="note" id="org5e1401f">
+<div class="note" id="orgd2b4f31">
 <p>
 To draw a uniform random number in Fortran, you can use
 the <a href="https://gcc.gnu.org/onlinedocs/gfortran/RANDOM_005fNUMBER.html"><code>RANDOM_NUMBER</code></a> subroutine.
@@ -1303,12 +1319,13 @@ the <a href="https://gcc.gnu.org/onlinedocs/gfortran/RANDOM_005fNUMBER.html"><co
 
 </div>
 
-<div class="note" id="orgc01e6cf">
+<div class="note" id="org54e9d03">
 <p>
 When running Monte Carlo calculations, the number of steps is
 usually very large. We expect <code>nmax</code> to be possibly larger than 2
 billion, so we use 8-byte integers (<code>integer*8</code>) to represent it, as
-well as the index of the current step.
+well as the index of the current step. This
+would imply modifying also the <code>ave_error</code> function.
 </p>
 
 </div>
@@ -1355,8 +1372,8 @@ well as the index of the current step.
 </div>
 </div>
 
-<div id="outline-container-org65f66f2" class="outline-3">
-<h3 id="org65f66f2"><span class="section-number-3">3.3.</span> Metropolis sampling with \(\Psi^2\)</h3>
+<div id="outline-container-org44565c6" class="outline-3">
+<h3 id="org44565c6"><span class="section-number-3">3.3.</span> Metropolis sampling with \(\Psi^2\)</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 We will now use the square of the wave function to sample random
@@ -1436,7 +1453,7 @@ which, for our choice of transition probability, becomes
    \]
 </p>
 
-<div class="exercise" id="org2218413">
+<div class="exercise" id="orge2357e6">
 <p>
 Explain why the transition probability cancels out in the
 expression of \(A\).
@@ -1461,7 +1478,7 @@ The algorithm is summarized as follows:
 <li>else, reject the move : set \(\mathbf{r}_{n+1} = \mathbf{r}_n\)</li>
 </ol>
 
-<div class="note" id="org71ac038">
+<div class="note" id="org1758c9f">
 <p>
 A common error is to remove the rejected samples from the
 calculation of the average. <b>Don't do it!</b>
@@ -1475,8 +1492,8 @@ All samples should be kept, from both accepted <i>and</i> rejected moves.
 </div>
 
 
-<div id="outline-container-org230248c" class="outline-4">
-<h4 id="org230248c"><span class="section-number-4">3.3.1.</span> Optimal step size</h4>
+<div id="outline-container-orga15b7ba" class="outline-4">
+<h4 id="orga15b7ba"><span class="section-number-4">3.3.1.</span> Optimal step size</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 If the box is infinitely small, the ratio will be very close
@@ -1501,7 +1518,7 @@ compromise for the current problem (not a general solution).
 </p>
 
 
-<div class="note" id="org30924e4">
+<div class="note" id="org1a01616">
 <p>
 Below, we use the symbol \(\delta t\) to denote \(\delta L\) since we will use
 the same variable later on to store a time step.
@@ -1512,10 +1529,10 @@ the same variable later on to store a time step.
 </div>
 
 
-<div id="outline-container-org2184f59" class="outline-4">
-<h4 id="org2184f59"><span class="section-number-4">3.3.2.</span> Exercise</h4>
+<div id="outline-container-orga8338d7" class="outline-4">
+<h4 id="orga8338d7"><span class="section-number-4">3.3.2.</span> Exercise</h4>
 <div class="outline-text-4" id="text-3-3-2">
-<div class="exercise" id="org2bc7701">
+<div class="exercise" id="org19ef740">
 <p>
 Modify the program of the previous section to compute the energy,
 sampled with \(\Psi^2\).
@@ -1561,7 +1578,7 @@ Can you observe a reduction in the statistical error?
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"E = </span>{E}<span style="color: #8b2252;"> +/- </span>{deltaE}<span style="color: #8b2252;">"</span>)
 
 # <span style="color: #b22222;">Acceptance rate</span>
-X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
+<span style="color: #a0522d;">X</span> = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
 <span style="color: #a0522d;">A</span>, <span style="color: #a0522d;">deltaA</span> = ave_error(X)
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"A = </span>{A}<span style="color: #8b2252;"> +/- </span>{deltaA}<span style="color: #8b2252;">"</span>)
 </pre>
@@ -1624,15 +1641,16 @@ X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a02
 </div>
 </div>
 
-<div id="outline-container-orged0a3ea" class="outline-3">
-<h3 id="orged0a3ea"><span class="section-number-3">3.4.</span> Generalized Metropolis algorithm</h3>
+<div id="outline-container-orgd46c0ba" class="outline-3">
+<h3 id="orgd46c0ba"><span class="section-number-3">3.4.</span> Generalized Metropolis algorithm</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 One can use more efficient numerical schemes to move the electrons by choosing a smarter expression for the transition probability.
 </p>
 
 <p>
-The Metropolis acceptance step has to be adapted accordingly to ensure that the detailed balance condition is satisfied. This means that
+The Metropolis acceptance step has to be adapted accordingly to ensure that 
+the detailed balance condition is satisfied. This means that
 the acceptance probability \(A\) is chosen so that it is consistent with the
 probability of leaving \(\mathbf{r}_n\) and the probability of
 entering \(\mathbf{r}_{n+1}\):
@@ -1680,7 +1698,7 @@ choose to draw Gaussian random numbers with zero mean and variance
    \]
 </p>
 
-<div class="note" id="org49ad37d">
+<div class="note" id="orgcfb62f3">
 <p>
 Note that, in our notation, \(\exp \left[ - \frac{\left(
    \mathbf{r}_{n+1} - \mathbf{r}_{n} \right)^2}{2\delta t} \right]\equiv \exp \left[ - \frac{\left|
@@ -1690,16 +1708,15 @@ Note that, in our notation, \(\exp \left[ - \frac{\left(
 </div>
 
 <p>
-To do this, we can use the gradient of the probability density
-</p>
-
-<p>
 Furthermore, to sample the density even better, we can "push" the electrons
-into in the regions of high probability, and "pull" them away from
+towards regions of high probability, and "pull" them away from
 the low-probability regions. This will increase the
 acceptance ratios and improve the sampling.
 </p>
 
+<p>
+To do this, we can use the gradient of the probability density
+</p>
 
 <p>
 \[
@@ -1728,16 +1745,15 @@ The corresponding move is proposed as
 <p>
 \[
    \mathbf{r}_{n+1} = \mathbf{r}_{n} + \delta t\, \frac{\nabla
-   \Psi(\mathbf{r})}{\Psi(\mathbf{r})} + \chi \,,
+   \Psi(\mathbf{r})}{\Psi(\mathbf{r})} + \sqrt{\delta t}\, \chi \,,
    \]
 </p>
 
 <p>
 where \(\chi\) is a Gaussian random variable with zero mean and
-variance \(\delta t\).
+variance 1. Multiplying by \(\sqrt{\delta t}\) makes the variance
+of the additional noise equal to \(\delta{t}\).
 </p>
-
-
 
 <p>
 The algorithm of the previous exercise is only slighlty modified as:
@@ -1746,17 +1762,33 @@ The algorithm of the previous exercise is only slighlty modified as:
 <ol class="org-ol">
 <li>Evaluate the local energy at \(\mathbf{r}_{n}\) and accumulate it</li>
 <li>Compute a new position \(\mathbf{r'} = \mathbf{r}_n +
-      \delta t\, \frac{\nabla \Psi(\mathbf{r})}{\Psi(\mathbf{r})} + \chi\)</li>
+      \delta t\, \frac{\nabla \Psi(\mathbf{r})}{\Psi(\mathbf{r})} + \sqrt{\delta t}\,\chi\)</li>
 <li>Evaluate \(\Psi(\mathbf{r}')\) and \(\frac{\nabla \Psi(\mathbf{r'})}{\Psi(\mathbf{r'})}\) at the new position</li>
 <li>Compute the ratio \(A = \frac{T(\mathbf{r}' \rightarrow \mathbf{r}_{n}) P(\mathbf{r}')}{T(\mathbf{r}_{n} \rightarrow \mathbf{r}') P(\mathbf{r}_{n})}\)</li>
 <li>Draw a uniform random number \(v \in [0,1]\)</li>
 <li>if \(v \le A\), accept the move : set \(\mathbf{r}_{n+1} = \mathbf{r'}\)</li>
 <li>else, reject the move : set \(\mathbf{r}_{n+1} = \mathbf{r}_n\)</li>
 </ol>
+
+<p>
+Here is an illustration of a trajectory:
+</p>
+
+
+<div id="org7a58311" class="figure">
+<p><img src="./H2_traj.png" alt="H2_traj.png" />
+</p>
 </div>
 
-<div id="outline-container-orgb9879b0" class="outline-4">
-<h4 id="orgb9879b0"><span class="section-number-4">3.4.1.</span> Gaussian random number generator</h4>
+<p>
+Averaging all the trajectories converges to the density of the
+hydrogen atom.
+<img src="./H2_traj2.png" alt="H2_traj2.png" />
+</p>
+</div>
+
+<div id="outline-container-org9c27380" class="outline-4">
+<h4 id="org9c27380"><span class="section-number-4">3.4.1.</span> Gaussian random number generator</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 To obtain Gaussian-distributed random numbers, you can apply the
@@ -1772,6 +1804,10 @@ z_2 &=& \sqrt{-2 \ln u_1} \sin(2 \pi u_2)
 Below is a Fortran implementation returning a Gaussian-distributed
 n-dimensional vector \(\mathbf{z}\). This will be useful for the
 following sections.
+</p>
+
+<p>
+In Python, you can use the <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html"><code>random.normal</code></a> function of Numpy.
 </p>
 
 <p>
@@ -1812,18 +1848,13 @@ following sections.
 <span style="color: #a020f0;">end subroutine</span> <span style="color: #0000ff;">random_gauss</span>
 </pre>
 </div>
-
-<p>
-In Python, you can use the <a href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html"><code>random.normal</code></a> function of Numpy.
-</p>
 </div>
 </div>
 
-
-<div id="outline-container-org1bdda4f" class="outline-4">
-<h4 id="org1bdda4f"><span class="section-number-4">3.4.2.</span> Exercise 1</h4>
+<div id="outline-container-org2615491" class="outline-4">
+<h4 id="org2615491"><span class="section-number-4">3.4.2.</span> Exercise 1</h4>
 <div class="outline-text-4" id="text-3-4-2">
-<div class="exercise" id="org83da086">
+<div class="exercise" id="orgc14a416">
 <p>
 If you use Fortran, copy/paste the <code>random_gauss</code> function in
 a Fortran file.
@@ -1831,7 +1862,7 @@ a Fortran file.
 
 </div>
 
-<div class="exercise" id="org4dd84fb">
+<div class="exercise" id="orgc4631ac">
 <p>
 Write a function to compute the drift vector \(\frac{\nabla \Psi(\mathbf{r})}{\Psi(\mathbf{r})}\).
 </p>
@@ -1864,13 +1895,18 @@ Write a function to compute the drift vector \(\frac{\nabla \Psi(\mathbf{r})}{\P
 </div>
 </div>
 
-<div id="outline-container-org589f2e1" class="outline-4">
-<h4 id="org589f2e1"><span class="section-number-4">3.4.3.</span> Exercise 2</h4>
+<div id="outline-container-org40fd304" class="outline-4">
+<h4 id="org40fd304"><span class="section-number-4">3.4.3.</span> Exercise 2</h4>
 <div class="outline-text-4" id="text-3-4-3">
-<div class="exercise" id="org68da6a3">
+<div class="exercise" id="org5e5dfc1">
 <p>
 Modify the previous program to introduce the drift-diffusion scheme.
 (This is a necessary step for the next section on diffusion Monte Carlo).
+</p>
+
+<p>
+Verify that your code is correct by checking compatibility with previous 
+exercises where you evaluated the energy of a wave function with \(a=1.2\).
 </p>
 
 </div>
@@ -1900,7 +1936,7 @@ Modify the previous program to introduce the drift-diffusion scheme.
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"E = </span>{E}<span style="color: #8b2252;"> +/- </span>{deltaE}<span style="color: #8b2252;">"</span>)
 
 # <span style="color: #b22222;">Acceptance rate</span>
-X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
+<span style="color: #a0522d;">X</span> = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
 <span style="color: #a0522d;">A</span>, <span style="color: #a0522d;">deltaA</span> = ave_error(X)
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"A = </span>{A}<span style="color: #8b2252;"> +/- </span>{deltaA}<span style="color: #8b2252;">"</span>)
 </pre>
@@ -1964,11 +2000,11 @@ X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a02
 </div>
 </div>
 
-<div id="outline-container-org0597139" class="outline-2">
-<h2 id="org0597139"><span class="section-number-2">4.</span> Diffusion Monte Carlo</h2>
+<div id="outline-container-org552c5fc" class="outline-2">
+<h2 id="org552c5fc"><span class="section-number-2">4.</span> Diffusion Monte Carlo</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-As we have seen, Variational Monte Carlo is a powerful method to
+As we have seen, variational Monte Carlo is a powerful method to
 compute integrals in large dimensions. It is often used in cases
 where the expression of the wave function is such that the integrals
 can't be evaluated (multi-centered Slater-type orbitals, correlation
@@ -1982,8 +2018,8 @@ finding a near-exact numerical solution to the Schrödinger equation.
 </p>
 </div>
 
-<div id="outline-container-org767bc18" class="outline-3">
-<h3 id="org767bc18"><span class="section-number-3">4.1.</span> Schrödinger equation in imaginary time</h3>
+<div id="outline-container-orgb776ef0" class="outline-3">
+<h3 id="orgb776ef0"><span class="section-number-3">4.1.</span> Schrödinger equation in imaginary time</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Consider the time-dependent Schrödinger equation:
@@ -2051,8 +2087,8 @@ system.
 </div>
 </div>
 
-<div id="outline-container-org6a3dd09" class="outline-3">
-<h3 id="org6a3dd09"><span class="section-number-3">4.2.</span> Relation to diffusion</h3>
+<div id="outline-container-org61fc070" class="outline-3">
+<h3 id="org61fc070"><span class="section-number-3">4.2.</span> Relation to diffusion</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 The <a href="https://en.wikipedia.org/wiki/Diffusion_equation">diffusion equation</a> of particles is given by
@@ -2132,13 +2168,13 @@ Therefore, in both cases, you are dealing with a "Bosonic" ground state.
 </div>
 </div>
 
-<div id="outline-container-orge652bd9" class="outline-3">
-<h3 id="orge652bd9"><span class="section-number-3">4.3.</span> Importance sampling</h3>
+<div id="outline-container-orgc5e1b8b" class="outline-3">
+<h3 id="orgc5e1b8b"><span class="section-number-3">4.3.</span> Importance sampling</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 In a molecular system, the potential is far from being constant
 and, in fact, diverges at the inter-particle coalescence points. Hence,
-it results in very large fluctuations of the erm weight associated with
+it results in very large fluctuations of the weight associated with
 the potental, making the calculations impossible in practice.
 Fortunately, if we multiply the Schrödinger equation by a chosen
 <i>trial wave function</i> \(\Psi_T(\mathbf{R})\) (Hartree-Fock, Kohn-Sham
@@ -2231,8 +2267,8 @@ energies computed with the trial wave function.
 </p>
 </div>
 
-<div id="outline-container-org2d64d3c" class="outline-4">
-<h4 id="org2d64d3c"><span class="section-number-4">4.3.1.</span> Appendix : Details of the Derivation</h4>
+<div id="outline-container-orgbf2939f" class="outline-4">
+<h4 id="orgbf2939f"><span class="section-number-4">4.3.1.</span> Appendix : Details of the Derivation</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 \[
@@ -2293,8 +2329,8 @@ Defining \(\Pi(\mathbf{R},t) = \psi(\mathbf{R},\tau)
 </div>
 </div>
 
-<div id="outline-container-orgb106070" class="outline-3">
-<h3 id="orgb106070"><span class="section-number-3">4.4.</span> Pure Diffusion Monte Carlo</h3>
+<div id="outline-container-org8187630" class="outline-3">
+<h3 id="org8187630"><span class="section-number-3">4.4.</span> Pure Diffusion Monte Carlo</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Instead of having a variable number of particles to simulate the
@@ -2341,7 +2377,7 @@ been reached and we can start an new trajectory from the current
 position: reset \(W(r_n) = 1\) and \(\tau_n
       = 0\)</li>
 <li>Compute a new position \(\mathbf{R'} = \mathbf{R}_n +
-      \delta t\, \frac{\nabla \Psi(\mathbf{R})}{\Psi(\mathbf{R})} + \chi\)</li>
+      \delta t\, \frac{\nabla \Psi(\mathbf{R})}{\Psi(\mathbf{R})} + \sqrt{\delta t}\,\chi\)</li>
 <li>Evaluate \(\Psi(\mathbf{R}')\) and \(\frac{\nabla \Psi(\mathbf{R'})}{\Psi(\mathbf{R'})}\) at the new position</li>
 <li>Compute the ratio \(A = \frac{T(\mathbf{R}' \rightarrow \mathbf{R}_{n}) P(\mathbf{R}')}{T(\mathbf{R}_{n} \rightarrow \mathbf{R}') P(\mathbf{R}_{n})}\)</li>
 </ol>
@@ -2383,15 +2419,15 @@ the DMC algorithm. However, its use reduces significantly the time-step error.</
 </div>
 
 
-<div id="outline-container-orga20717a" class="outline-3">
-<h3 id="orga20717a"><span class="section-number-3">4.5.</span> Hydrogen atom</h3>
+<div id="outline-container-orga45bd0c" class="outline-3">
+<h3 id="orga45bd0c"><span class="section-number-3">4.5.</span> Hydrogen atom</h3>
 <div class="outline-text-3" id="text-4-5">
 </div>
 
-<div id="outline-container-org778faf1" class="outline-4">
-<h4 id="org778faf1"><span class="section-number-4">4.5.1.</span> Exercise</h4>
+<div id="outline-container-orgd4e0228" class="outline-4">
+<h4 id="orgd4e0228"><span class="section-number-4">4.5.1.</span> Exercise</h4>
 <div class="outline-text-4" id="text-4-5-1">
-<div class="exercise" id="org18dff35">
+<div class="exercise" id="orgee20288">
 <p>
 Modify the Metropolis VMC program into a PDMC program.
 In the limit \(\delta t \rightarrow 0\), you should recover the exact
@@ -2427,7 +2463,7 @@ time \(\tau_{\text{max}}\) =100 a.u.
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"E = </span>{E}<span style="color: #8b2252;"> +/- </span>{deltaE}<span style="color: #8b2252;">"</span>)
 
 # <span style="color: #b22222;">Acceptance rate</span>
-X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
+<span style="color: #a0522d;">X</span> = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a020f0;">in</span> X0 ]
 <span style="color: #a0522d;">A</span>, <span style="color: #a0522d;">deltaA</span> = ave_error(X)
 <span style="color: #483d8b;">print</span>(f<span style="color: #8b2252;">"A = </span>{A}<span style="color: #8b2252;"> +/- </span>{deltaA}<span style="color: #8b2252;">"</span>)
 </pre>
@@ -2496,8 +2532,8 @@ X = [ x <span style="color: #a020f0;">for</span> (_, x) <span style="color: #a02
 
 
 
-<div id="outline-container-org47d83c1" class="outline-2">
-<h2 id="org47d83c1"><span class="section-number-2">5.</span> Going beyond one electron</h2>
+<div id="outline-container-org76c1e44" class="outline-2">
+<h2 id="org76c1e44"><span class="section-number-2">5.</span> Going beyond one electron</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Change your PDMC code for:
@@ -2511,7 +2547,7 @@ Change your PDMC code for:
 And compute the ground state energy.
 </p>
 
-<div class="note" id="org4dfb9cb">
+<div class="note" id="org3b696c3">
 <p>
 Read file Two-electrons-QMC.pdf on canvas.
 </p>
@@ -2522,11 +2558,11 @@ Read file Two-electrons-QMC.pdf on canvas.
 
 
 
-<div id="outline-container-org919eeb7" class="outline-2">
-<h2 id="org919eeb7"><span class="section-number-2">6.</span> Acknowledgments</h2>
+<div id="outline-container-org4fb2d79" class="outline-2">
+<h2 id="org4fb2d79"><span class="section-number-2">6.</span> Acknowledgments</h2>
 <div class="outline-text-2" id="text-6">
 
-<div id="orga052ef7" class="figure">
+<div id="org872bf66" class="figure">
 <p><img src="https://trex-coe.eu/sites/default/files/inline-images/euflag.jpg" alt="euflag.jpg" />
 </p>
 </div>
@@ -2542,8 +2578,8 @@ Union is not responsible for any use that might be made of such content.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Anthony Scemama, Claudia Filippi</p>
-<p class="date">Created: 2023-05-31 Wed 15:42</p>
+<p class="author">Author: Anthony Scemama, Vijay Gopal Chilkuri, Claudia Filippi</p>
+<p class="date">Created: 2024-06-02 Sun 13:03</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
